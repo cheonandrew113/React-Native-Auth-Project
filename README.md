@@ -1,132 +1,183 @@
-Available Scripts
-If Yarn was installed when the project was initialized, then dependencies will have been installed via Yarn, and you should probably use it to run these commands as well. Unlike dependency installation, command running syntax is identical for Yarn and NPM at the time of this writing.
+# Context and goal
 
-npm start
-Runs your app in development mode.
+Sign in / Sign up using Google, Facebook and traditional email and password. Show user the welcome page.
 
-Open it in the Expo app on your phone to view it. It will reload if you save edits to your files, and you will see build errors and logs in the terminal.
+## Preview
 
-Sometimes you may need to reset or clear the React Native packager's cache. To do so, you can pass the --reset-cache flag to the start script:
+![gif preview](https://raw.githubusercontent.com/mbeaudru/react-native-sample/master/assets/preview.gif)
 
-npm start -- --reset-cache
-# or
-yarn start -- --reset-cache
-npm test
-Runs the jest test runner on your tests.
+> Note: 6MB size GIF, might take some time to load
 
-npm run ios
-Like npm start, but also attempts to open your app in the iOS Simulator if you're on a Mac and have it installed.
+## Main technologies used
 
-npm run android
-Like npm start, but also attempts to open your app on a connected Android device or emulator. Requires an installation of Android build tools (see React Native docs for detailed setup). We also recommend installing Genymotion as your Android emulator. Once you've finished setting up the native build environment, there are two options for making the right copy of adb available to Create React Native App:
+- [React Native](https://github.com/facebook/react-native)
 
-Using Android Studio's adb
-Make sure that you can run adb from your terminal.
-Open Genymotion and navigate to Settings -> ADB. Select “Use custom Android SDK tools” and update with your Android SDK directory.
-Using Genymotion's adb
-Find Genymotion’s copy of adb. On macOS for example, this is normally /Applications/Genymotion.app/Contents/MacOS/tools/.
-Add the Genymotion tools directory to your path (instructions for Mac, Linux, and Windows).
-Make sure that you can run adb from your terminal.
-npm run eject
-This will start the process of "ejecting" from Create React Native App's build scripts. You'll be asked a couple of questions about how you'd like to build your project.
+- [Expo](https://https://docs.expo.io/versions/latest/)
 
-Warning: Running eject is a permanent action (aside from whatever version control system you use). An ejected app will require you to have an Xcode and/or Android Studio environment set up.
 
-Customizing App Display Name and Icon
-You can edit app.json to include configuration keys under the expo key.
+## Running the project
 
-To change your app's display name, set the expo.name key in app.json to an appropriate string.
+- Clone this project
+```
+git clone < project-url.git >
+```
 
-To set an app icon, set the expo.icon key in app.json to be either a local path or a URL. It's recommended that you use a 512x512 png file with transparency.
+- [Install NodeJS](https://nodejs.org/en/) on your computer.
 
-Writing and Running Tests
-This project is set up to use jest for tests. You can configure whatever testing strategy you like, but jest works out of the box. Create test files in directories called __tests__ or with the .test extension to have the files loaded by jest. See the the template project for an example test. The jest documentation is also a wonderful resource, as is the React Native testing tutorial.
+- [Install yarn](https://yarnpkg.com/en/docs/install) on your computer
+> Yarn is a dependency manager built by facebook and google. It is a more efficient and reliable (thanks to yarn.lock) alternative of npm.
 
-Environment Variables
-You can configure some of Create React Native App's behavior using environment variables.
+- Launch ``` yarn ``` command in a terminal opened in the project folder.
+> This command will look into the *package.json* file and install all the dependencies listed here.
 
-Configuring Packager IP Address
-When starting your project, you'll see something like this for your project URL:
+- Install react-native-cli globally on your computer
+```
+yarn global add react-native-cli
+```
 
-exp://192.168.0.2:19000
-The "manifest" at that URL tells the Expo app how to retrieve and load your app's JavaScript bundle, so even if you load it in the app via a URL like exp://localhost:19000, the Expo client app will still try to retrieve your app at the IP address that the start script provides.
+### iOS steps
 
-In some cases, this is less than ideal. This might be the case if you need to run your project inside of a virtual machine and you have to access the packager via a different IP address than the one which prints by default. In order to override the IP address or hostname that is detected by Create React Native App, you can specify your own hostname via the REACT_NATIVE_PACKAGER_HOSTNAME environment variable:
+- Launch a virtual android device [(through *Android Studio* for instance)](https://developer.android.com/studio/run/managing-avds.html#viewing)
 
-Mac and Linux:
+> If you have never installed any android virtual device, [follow those instructions](https://developer.android.com/studio/run/managing-avds.html#createavd)
 
-REACT_NATIVE_PACKAGER_HOSTNAME='my-custom-ip-address-or-hostname' npm start
-Windows:
+- Then, run the project in executing on your project folder:
 
-set REACT_NATIVE_PACKAGER_HOSTNAME='my-custom-ip-address-or-hostname'
-npm start
-The above example would cause the development server to listen on exp://my-custom-ip-address-or-hostname:19000.
+```
+react-native run-android
+```
 
-Adding Flow
-Flow is a static type checker that helps you write code with fewer bugs. Check out this introduction to using static types in JavaScript if you are new to this concept.
+## Troubleshooting
 
-React Native works with Flow out of the box, as long as your Flow version matches the one used in the version of React Native.
+**Note:** Each time you pull commits from others, run the **yarn** command to install dependencies that may have been introduced.
 
-To add a local dependency to the correct Flow version to a Create React Native App project, follow these steps:
+### react-native is not recognized as an internal or external command
+- If your terminal is telling you react-native is not known, try to install it globally with npm: ```npm install -g react-native-cli``` and re-run the above command.
 
-Find the Flow [version] at the bottom of the included .flowconfig
-Run npm install --save-dev flow-bin@x.y.z (or yarn add --dev flow-bin@x.y.z), where x.y.z is the .flowconfig version number.
-Add "flow": "flow" to the scripts section of your package.json.
-Add // @flow to any files you want to type check (for example, to App.js).
-Now you can run npm run flow (or yarn flow) to check the files for type errors. You can optionally use a plugin for your IDE or editor for a better integrated experience.
+### 'adb' is not recognized as an internal or external command
 
-To learn more about Flow, check out its documentation.
+If you have a build error with this message on Windows, it means that you must add the Android sdk platform tools to your environment PATH.
 
-Sharing and Deployment
-Create React Native App does a lot of work to make app setup and development simple and straightforward, but it's very difficult to do the same for deploying to Apple's App Store or Google's Play Store without relying on a hosted service.
+[How to add an environment variable on your computer.](https://www.java.com/en/download/help/path.xml)
 
-Publishing to Expo's React Native Community
-Expo provides free hosting for the JS-only apps created by CRNA, allowing you to share your app through the Expo client app. This requires registration for an Expo account.
+My value on windows: *```C:\Users\Manuel\AppData\Local\Android\sdk\platform-tools```*
 
-Install the exp command-line tool, and run the publish command:
+### failed to find target with hash string 'android-23'
 
-$ npm i -g exp
-$ exp publish
-Building an Expo "standalone" app
-You can also use a service like Expo's standalone builds if you want to get an IPA/APK for distribution without having to build the native code yourself.
+React Native needs this to be installed in order to work, and the default target installed by *Android Studio* is the 24th. To solve this issue, open android studio and click on SDK Manager Icon:
 
-Ejecting from Create React Native App
-If you want to build and deploy your app yourself, you'll need to eject from CRNA and use Xcode and Android Studio.
+![SDK Manager](https://i.snag.gy/bxQd0z.jpg)
 
-This is usually as simple as running npm run eject in your project, which will walk you through the process. Make sure to install react-native-cli and follow the native code getting started guide for React Native.
+Then click on the line with API Level of value 23 and apply.
 
-Should I Use ExpoKit?
-If you have made use of Expo APIs while working on your project, then those API calls will stop working if you eject to a regular React Native project. If you want to continue using those APIs, you can eject to "React Native + ExpoKit" which will still allow you to build your own native code and continue using the Expo APIs. See the ejecting guide for more details about this option.
+![Install API 23 Instructions](https://i.snag.gy/LtYAR7.jpg)
 
-Troubleshooting
-Networking
-If you're unable to load your app on your phone due to a network timeout or a refused connection, a good first step is to verify that your phone and computer are on the same network and that they can reach each other. Create React Native App needs access to ports 19000 and 19001 so ensure that your network and firewall settings allow access from your device to your computer on both of these ports.
+### failed to find Build Tools revision *XX.X.X*
 
-Try opening a web browser on your phone and opening the URL that the packager script prints, replacing exp:// with http://. So, for example, if underneath the QR code in your terminal you see:
+It seems you are missing the build tools at specific revision *XX.X.X*, so you need to install them. Go to Android Studio SDK Settings (see images above) and click on the SDK Tools snippet.
 
-exp://192.168.0.1:19000
-Try opening Safari or Chrome on your phone and loading
+Then, click on **Show Package Details** and look for Android SDK Build Tools *XX.X.X*. Then check if it is installed. If not, install it and this issue should be solved then.
 
-http://192.168.0.1:19000
-and
+![SDK Manager Standalone](https://i.snag.gy/Y3X58Z.jpg)
 
-http://192.168.0.1:19001
-If this works, but you're still unable to load your app by scanning the QR code, please open an issue on the Create React Native App repository with details about these steps and any other error messages you may have received.
+### Execution failed for task ':app:dexDebug'
 
-If you're not able to load the http URL in your phone's web browser, try using the tethering/mobile hotspot feature on your phone (beware of data usage, though), connecting your computer to that WiFi network, and restarting the packager.
+Go into the **android** project's folder in your terminal and run
 
-iOS Simulator won't open
-If you're on a Mac, there are a few errors that users sometimes see when attempting to npm run ios:
+*Windows*
+```
+gradlew clean
+```
 
-"non-zero exit code: 107"
-"You may need to install Xcode" but it is already installed
-and others
-There are a few steps you may want to take to troubleshoot these kinds of errors:
+*Linux & Mac*
+```
+./gradlew clean
+```
 
-Make sure Xcode is installed and open it to accept the license agreement if it prompts you. You can install it from the Mac App Store.
-Open Xcode's Preferences, the Locations tab, and make sure that the Command Line Tools menu option is set to something. Sometimes when the CLI tools are first installed by Homebrew this option is left blank, which can prevent Apple utilities from finding the simulator. Make sure to re-run npm/yarn run ios after doing so.
-If that doesn't work, open the Simulator, and under the app menu select Reset Contents and Settings.... After that has finished, quit the Simulator, and re-run npm/yarn run ios.
-QR Code does not scan
-If you're not able to scan the QR code, make sure your phone's camera is focusing correctly, and also make sure that the contrast on the two colors in your terminal is high enough. For example, WebStorm's default themes may not have enough contrast for terminal QR codes to be scannable with the system barcode scanners that the Expo app uses.
+Then delete the build folder, go back to the project's root folder and try again, this error should be solved.
 
-If this causes problems for you, you may want to try changing your terminal's color theme to have more contrast, or running Create React Native App from a different terminal. You can also manually enter the URL printed by the packager script in the Expo app's search bar to load it manually.
+> **Note:** If it doesn't work as expected, try checking you have not forgotten any of the steps above. If not, please **open an issue and describe your problem**.
+
+## Contributing to the project
+
+Since the linting is done through [**eslint**](http://eslint.org/), you will need to configure your text editor to use the coding rules defined in the *.eslint.js* project file.
+
+> A code that contains unjustified errors won't be merged to the master branch.
+
+### Atom
+
+- [Install Atom](https://atom.io/) if it's not done yet.
+
+- [Open the Atom settings](http://flight-manual.atom.io/getting-started/sections/atom-basics/#settings-and-preferences) (*"Ctrl + ,"* shortcut) and go to *Install* section
+
+![install-section](http://www.codeblocq.com/img/atom-prefs-install-tab.png)
+
+- Then look for the linter package and install it
+
+![linter-package](http://www.codeblocq.com/img/atom-linter-package.png)
+
+- Then look for the linter-eslint package and install it
+
+![linter-eslint-package](http://www.codeblocq.com/img/atom-linter-eslint-package.png)
+
+- Open a javascript file (ending with *.js*) and paste
+
+```js
+console.log('raises two errors')
+```
+As you can guess, your editor should raise two errors because console.log is forbidden and there is a semi-column missing. Congrats !
+
+> **Note:** If it doesn't work as expected, try checking you have not forgotten any of the steps above. If not, please open an issue and describe your problem.
+
+## Testing
+
+We will use [Jest](https://facebook.github.io/jest/) testing library because it allows us to test both components and functions in an easy and efficient way.
+
+To run the tests, execute ```yarn test``` in a terminal opened in the project folder.
+If you want to re-test each time you modify a test file, run ```yarn run test:watch```. Jest will watch for file changes and relaunch the tests for you.
+
+### Files location
+
+All tests are written in a \_\_tests\_\_ folder, alongside to what you want to test. For instance, there is a \_\_test\_\_ folder in the components folder, one other in actions, reducers and so on.
+
+Jest will look for tests into those \_\_tests\_\_ folders, so you can't name it another way.
+
+> **Note:** \_\_snapshots\_\_ folders are automatically generated, don't create them on your own.
+
+### Unit testing redux (actions, reducers)
+
+Dan Abramov, one of the main creator of Redux, [has written a very nice documentation](http://redux.js.org/docs/recipes/WritingTests.html#action-creators) that cover how to test actions and reducers with Jest.
+
+### Components testing
+
+Jest has a nice feature called [*snapshots*](https://facebook.github.io/jest/docs/tutorial-react-native.html#snapshot-test) that allow developers to pass inputs (props) to components and to test what the rendered result is.
+
+Here are resources for you to understand deeper how it works:
+- [Jest - React Tree Snapshot Testing](http://facebook.github.io/jest/blog/2016/07/27/jest-14.html)
+- [Jest - Snapshot documentation](http://facebook.github.io/jest/docs/tutorial-react-native.html#snapshot-test)
+- [Jest - Facebook quick live tutorial](https://www.facebook.com/react/videos/1035427199869020/)
+- [...and many others](http://facebook.github.io/jest/blog/2016/10/03/jest-16.html#community-update)
+
+To sum snapshots tests up, it consist in this workflow:
+
+- Create your component until you are satisfied with it
+- Write snapshots tests in passing all kind of props to your component
+- If you are satisfied with the produced snapshot, keep it. If not, fix your component.
+- Next time you modify your component, your saved snapshot will be compared to the produced result and it is up to you to determine if you are satisfied or not. If you are, *update* your snapshot with -u.
+
+In this project, we separate snapshot testing from the rest. Snapshot tests are written in files that follow this convention:
+
+```
+< ComponentName >Snap.js
+```
+
+Jest doesn't provide a proper way to test user interactions, nor a way to test methods inside components. To do so, you have to use something else among:
+
+- [React Test Utilities](https://facebook.github.io/react/docs/test-utils.html)
+- [Enzyme](http://airbnb.io/enzyme/)
+
+In this project, we have decided to use **Enzyme** to test the components methods. The naming convention for those tests is:
+
+```
+< ComponentName >.js
+```
