@@ -106,9 +106,35 @@ export default class SignUpScreen extends React.Component{
             console.log(error)
         })
     }
-}
+  }
 
-  signUpUser = (email, password) => {
+  // facebookLogIn= async() => {
+  //   try {
+  //     await Facebook.initializeAsync('227493178644063');
+  //     const {
+  //       type,
+  //       token,
+  //       expires,
+  //       permissions,
+  //       declinedPermissions,
+  //     } = await Facebook.logInWithReadPermissionsAsync({
+  //       permissions: ['public_profile'],
+  //     });
+  //     if (type === 'success') {
+  //       // Get the user's name using Facebook's Graph API
+  //       const credential = firebase.auth.FacebookAuthProvider.credential(token)
+  //       firebase.auth().signInWithCredential(credential).catch((error) => {
+  //         console.log(error)
+  //       })
+  //     } else {
+  //       // type === 'cancel'
+  //     }
+  //   } catch ({ message }) {
+  //     alert(`Facebook Login Error: ${message}`);
+  //   }
+  // }
+
+  signUpUser = () => {
     //   if(this.state.password.length < 6){
     //     alert("The password must be at least 6 characters long")
     //     return

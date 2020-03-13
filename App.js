@@ -6,7 +6,10 @@ import LoadingScreen from './screens/LoadingScreen'
 import HomeScreen from './screens/HomeScreen'
 import SignUpScreen from './screens/SignUpScreen';
 import { createSwitchNavigator, createAppContainer } from 'react-navigation';
-import {createStackNavigator} from 'react-navigation-stack'
+import { createStackNavigator } from 'react-navigation-stack'
+import { Asset } from 'expo'
+
+
 
 const firebaseConfig = {
   apiKey: "AIzaSyDeH4gJMT80KIf6YXf-8SqenOQ5jqU7MRk",

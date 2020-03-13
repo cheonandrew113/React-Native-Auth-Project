@@ -42,7 +42,7 @@ export default class HomeScreen extends React.Component{
                 width: 172,
                 alignItems: "center", 
                 justifyContent: "center"}} onPress={this.signOutUser}>
-                    <Text>LogOut</Text>
+                    <Text>Sign Out</Text>
                 </TouchableOpacity>
             </View>
 
