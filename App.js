@@ -28,12 +28,12 @@ if (!firebase.apps.length) {
 }
 
 const AppStack = createStackNavigator({
-  HomeScreen: HomeScreen
+  Home: HomeScreen
 })
 
 const AuthStack = createStackNavigator({
-  LoginScreen: LoginScreen,
-  SignUpScreen: SignUpScreen
+  LogIn: LoginScreen,
+  SignUp: SignUpScreen
 })
 
 export default createAppContainer(
