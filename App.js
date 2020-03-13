@@ -1,69 +1,51 @@
 import React from 'react';
-import {StyleSheet, Text, View, Button} from 'react-native';
-// import LoadingScreen from './screens/LoadingScreen'
-// import HomeScreen from './screens/HomeScreen'
-// import LoginScreen from './screens/LoginScreen'
-// import {createAppContainer, createSwitchNavigator} from 'react-navigation'
-import StyledFirebaseAuth from 'react-firebaseui/StyledFirebaseAuth'
 import * as firebase from 'firebase'
-import {firebaseConfig} from './config'
-firebase.initializeApp(firebaseConfig)
+import Expo from 'expo'
+import LoginScreen from './screens/LoginScreen'
+import LoadingScreen from './screens/LoadingScreen'
+import HomeScreen from './screens/HomeScreen'
+import SignUpScreen from './screens/SignUpScreen';
+import { createSwitchNavigator, createAppContainer } from 'react-navigation';
+import {createStackNavigator} from 'react-navigation-stack'
 
-export default class App extends React.Component{
-  state = { isSignedIn: false }
-  uiConfig = {
-    signInFlow: "popup",
-    signInOptions: [
-      firebase.auth.FacebookAuthProvider.PROVIDER_ID
-    ],
-    callbacks: {
-      signInSuccess: () => false
-    }
-  }
+const firebaseConfig = {
+  apiKey: "AIzaSyDeH4gJMT80KIf6YXf-8SqenOQ5jqU7MRk",
+  authDomain: "fir-auth-social-media.firebaseapp.com",
+  databaseURL: "https://fir-auth-social-media.firebaseio.com",
+  projectId: "fir-auth-social-media",
+  storageBucket: "fir-auth-social-media.appspot.com",
+  messagingSenderId: "980241211527",
+  appId: "1:980241211527:web:d0a98643b053618b361822",
+  measurementId: "G-XSMPKJHCZY"
+}
 
-  componentDidMount = () => {
-    firebase.auth().onAuthStateChanged(user => {
-      this.setState({ isSignedIn: !!user })
-      console.log("user", user)
-    })
-  }
-
-  render(){
-    return (
-      <StyledFirebaseAuth title="Click"
-      uiConfig={this.uiConfig}/>
-      <View style={styles.container}>
-
-        
-      </View>
-      // <AppNavigator />
-      // <View style={styles.container}>
-      //   <Text> Hello </Text>
-      //   {this.state.isSignedIn ? (
-      //     // <Text> Hi </Text>
-       
-      //     <Button title="Click me" onPress={() => firebase.auth().signOut()} /> 
-    
-      //   ) : (
-      //   )}
-      // </View>
-    )
+if (!firebase.apps.length) {
+  try {
+      firebase.initializeApp(firebaseConfig)
+  } catch (err) {
+      console.error("Firebase initialization error raised", err.stack)
   }
 }
 
-// const AppSwitchNavigator = createSwitchNavigator({
-//   LoadingScreen: LoadingScreen,
-//   LoginScreen: LoginScreen,
-//   HomeScreen: HomeScreen
-// })
+const AppStack = createStackNavigator({
+  HomeScreen: HomeScreen
+})
 
-// const AppNavigator = createAppContainer(AppSwitchNavigator)
+const AuthStack = createStackNavigator({
+  LoginScreen: LoginScreen,
+  SignUpScreen: SignUpScreen
+})
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});
+export default createAppContainer(
+
+  createSwitchNavigator(
+    {
+      Loading: LoadingScreen,
+      Auth: AuthStack,
+      App: AppStack,
+    },
+    {
+      initialRouteName: "Loading"
+    }
+  )
+)
